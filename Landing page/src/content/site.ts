@@ -7,9 +7,9 @@ import type { CtaLink } from '../types/content'
  */
 export const siteContent = {
   brandName: siteConfig.brandName,
-  heroHeadline: 'Arrive in platinum.',
+  heroHeadline: 'Your ultimate luxury drive awaits.',
   heroDescription:
-    'Premium luxury and exotic car hire for weddings, formals, corporate travel, and occasions that deserve a remarkable arrival.',
+    'Rent the world\'s finest cars and redefine luxury travel for weddings, formals, corporate arrivals, and private occasions.',
   primaryCta: {
     id: 'enquire',
     label: 'Enquire now',
@@ -23,8 +23,9 @@ export const siteContent = {
     variant: 'secondary',
   } satisfies CtaLink,
   heroMedia: {
-    carSrc: '/assets/images/hero/rolls-royce-ghost-urban-cinematic.jpg',
-    carAlt: 'White Rolls-Royce Ghost in a dramatic urban setting',
-    glowSrc: '/assets/images/textures/headlight-glow-detail.jpg',
+    /** Clean cinematic moving-car hero (no stock watermark; muted playback). */
+    videoSrc: '/assets/video/hero/luxury-hero-drive.mp4',
+    posterSrc: '/assets/images/hero/cinematic-supercar-headlights-smoke.png',
+    carAlt: 'Black luxury supercar racing toward camera on a bridge',
   },
 }

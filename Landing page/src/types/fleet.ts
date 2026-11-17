@@ -1,6 +1,6 @@
 /**
  * Fleet domain types for Platinum Luxury Rides.
- * Populate from client-approved inventory only — do not invent vehicles or prices.
+ * Prices and verified specs stay optional until client-approved.
  */
 
 export type VehicleCategory =
@@ -17,9 +17,7 @@ export type RateUnit = 'hour' | 'day'
 export interface HireRate {
   mode: HireMode
   unit: RateUnit
-  /** Indicative amount in AUD; omit until client-approved. */
   amountAud?: number
-  /** When true, show enquire CTA instead of a number. */
   enquiryOnly?: boolean
 }
 
@@ -28,9 +26,27 @@ export interface Vehicle {
   name: string
   slug: string
   category: VehicleCategory
-  passengerCapacity?: number
+  categoryLabel: string
+  /** Soft occasion hint — not a verified capacity claim. */
+  occasionHint?: string
   description?: string
-  imageSrc?: string
+  imageSrc: string
+  imageAlt: string
   rates?: HireRate[]
   featured?: boolean
+  /**
+   * Soft capacity labels for CRO cards.
+   * Always confirm exact passengers / luggage on enquiry — never treat as guaranteed.
+   */
+  capacityNote?: string
+  luggageNote?: string
+  featureHighlights?: string[]
+}
+
+export const categoryLabels: Record<VehicleCategory, string> = {
+  'luxury-sedan': 'Luxury Sedan',
+  'premium-suv': 'Premium SUV',
+  'sports-car': 'Sports Car',
+  'group-van': 'Group',
+  classic: 'Classic',
 }

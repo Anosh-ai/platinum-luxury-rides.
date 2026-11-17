@@ -2,12 +2,20 @@ import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useId, useState } from 'react'
 import { siteConfig } from '../../config/site.config'
 import { mainNavigation } from '../../content/navigation'
-import { siteContent } from '../../content/site'
+import { routes } from '../../constants/routes'
 import { cn } from '../../lib/utils/cn'
 import { Button } from '../ui/Button'
 import { Container } from './Container'
 
-export function Navbar() {
+type NavbarProps = {
+  /** Hidden during cinematic intro so the logo is not shown twice. */
+  revealed?: boolean
+}
+
+/**
+ * Sticky CRO header — Book Now + contact path. Logo unchanged.
+ */
+export function Navbar({ revealed = true }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const menuId = useId()
@@ -26,16 +34,27 @@ export function Navbar() {
     }
   }, [open])
 
+  useEffect(() => {
+    if (!revealed) setOpen(false)
+  }, [revealed])
+
   const closeMenu = () => setOpen(false)
+  const contactHref = siteConfig.contact.phoneTel ?? routes.sections.contact
+  const contactLabel = siteConfig.contact.phoneDisplay ?? 'Contact'
+  const hasPhone = Boolean(siteConfig.contact.phoneTel)
 
   return (
     <header
       className={cn(
-        'fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300',
+        'fixed inset-x-0 top-0 z-50 transition-[opacity,transform,background-color,border-color,backdrop-filter] duration-500',
+        revealed
+          ? 'pointer-events-auto translate-y-0 opacity-100'
+          : 'pointer-events-none -translate-y-3 opacity-0',
         scrolled || open
-          ? 'border-b border-white/10 bg-[var(--color-black)]/90 backdrop-blur-md'
+          ? 'border-b border-[var(--color-gold)]/20 bg-[var(--color-black)]/85 backdrop-blur-xl'
           : 'border-b border-transparent bg-transparent',
       )}
+      aria-hidden={!revealed}
     >
       <Container
         width="wide"
@@ -43,73 +62,96 @@ export function Navbar() {
       >
         <a
           href="#hero"
-          className="relative z-10 flex shrink-0 items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-cyan)]"
+          tabIndex={revealed ? 0 : -1}
+          className="relative z-10 flex shrink-0 items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-gold)]"
           aria-label={`${siteConfig.brandName} — home`}
         >
           <img
             src={siteConfig.logoSrc}
             alt={siteConfig.brandName}
-            width={180}
-            height={60}
-            className="h-10 w-auto object-contain sm:h-12"
+            width={210}
+            height={70}
+            className="h-11 w-auto object-contain sm:h-[3.25rem] lg:h-14"
             decoding="async"
           />
         </a>
 
-        <div className="hidden items-center gap-8 lg:flex">
-          <nav className="flex items-center gap-8" aria-label="Primary">
+        <div className="hidden items-center gap-6 xl:gap-8 lg:flex">
+          <nav className="flex items-center gap-5 xl:gap-7" aria-label="Primary">
             {mainNavigation.map((item) => (
               <a
                 key={item.id}
                 href={item.href}
-                className="text-[0.7rem] font-medium uppercase tracking-[0.18em] text-[var(--color-chrome)] transition-colors hover:text-white"
+                tabIndex={revealed ? 0 : -1}
+                className="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-[var(--color-chrome)] transition-colors hover:text-[var(--color-gold)]"
               >
                 {item.label}
               </a>
             ))}
           </nav>
-          <Button href={siteContent.primaryCta.href} size="md">
-            {siteContent.primaryCta.label}
+
+          <a
+            href={contactHref}
+            tabIndex={revealed ? 0 : -1}
+            className="whitespace-nowrap text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-[var(--color-gold-soft)] transition-colors hover:text-white"
+            aria-label={hasPhone ? `Call ${contactLabel}` : 'Go to contact section'}
+          >
+            {hasPhone ? contactLabel : '24/7 Contact'}
+          </a>
+
+          <Button href={routes.sections.quote} size="md" tabIndex={revealed ? 0 : -1}>
+            Book Now
           </Button>
         </div>
 
-        <button
-          type="button"
-          className="relative z-10 flex h-11 w-11 items-center justify-center rounded-sm border border-white/15 text-white lg:hidden"
-          aria-expanded={open}
-          aria-controls={menuId}
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          onClick={() => setOpen((value) => !value)}
-        >
-          <span className="sr-only">{open ? 'Close' : 'Menu'}</span>
-          <span className="flex w-5 flex-col gap-1.5" aria-hidden="true">
-            <span
-              className={cn(
-                'h-px w-full bg-current transition-transform duration-300',
-                open && 'translate-y-[3.5px] rotate-45',
-              )}
-            />
-            <span
-              className={cn(
-                'h-px w-full bg-current transition-opacity duration-300',
-                open && 'opacity-0',
-              )}
-            />
-            <span
-              className={cn(
-                'h-px w-full bg-current transition-transform duration-300',
-                open && '-translate-y-[3.5px] -rotate-45',
-              )}
-            />
-          </span>
-        </button>
+        <div className="flex items-center gap-2 lg:hidden">
+          <Button
+            href={routes.sections.quote}
+            size="md"
+            tabIndex={revealed ? 0 : -1}
+            className="!px-3 !py-2.5 text-[0.65rem]"
+          >
+            Book
+          </Button>
+          <button
+            type="button"
+            tabIndex={revealed ? 0 : -1}
+            className="relative z-10 flex h-11 w-11 items-center justify-center border border-white/15 text-white"
+            aria-expanded={open}
+            aria-controls={menuId}
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            onClick={() => setOpen((value) => !value)}
+          >
+            <span className="sr-only">{open ? 'Close' : 'Menu'}</span>
+            <span className="flex w-5 flex-col gap-1.5" aria-hidden="true">
+              <span
+                className={cn(
+                  'h-px w-full bg-current transition-transform duration-300',
+                  open && 'translate-y-[3.5px] rotate-45',
+                )}
+              />
+              <span
+                className={cn(
+                  'h-px w-full bg-current transition-opacity duration-300',
+                  open && 'opacity-0',
+                )}
+              />
+              <span
+                className={cn(
+                  'h-px w-full bg-current transition-transform duration-300',
+                  open && '-translate-y-[3.5px] -rotate-45',
+                )}
+              />
+            </span>
+          </button>
+        </div>
       </Container>
 
       <AnimatePresence>
-        {open ? (
+        {open && revealed ? (
           <motion.div
             id={menuId}
-            className="border-t border-white/10 bg-[var(--color-black)] lg:hidden"
+            className="border-t border-[var(--color-gold)]/20 bg-[var(--color-black)]/95 backdrop-blur-xl lg:hidden"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -126,13 +168,16 @@ export function Navbar() {
                   {item.label}
                 </a>
               ))}
+              <a
+                href={contactHref}
+                onClick={closeMenu}
+                className="px-1 py-3 text-sm uppercase tracking-[0.16em] text-[var(--color-gold)]"
+              >
+                {hasPhone ? contactLabel : 'Contact'}
+              </a>
               <div className="pt-4">
-                <Button
-                  href={siteContent.primaryCta.href}
-                  className="w-full"
-                  onClick={closeMenu}
-                >
-                  {siteContent.primaryCta.label}
+                <Button href={routes.sections.quote} className="w-full" onClick={closeMenu}>
+                  Book Now
                 </Button>
               </div>
             </Container>

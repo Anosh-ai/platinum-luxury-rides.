@@ -4,24 +4,24 @@
 
 export type AnimationPhase =
   | 'idle'
-  | 'logo'
-  | 'headlights'
   | 'drive-in'
   | 'settle'
   | 'copy'
   | 'cta'
   | 'complete'
 
+/** Single moving-car video hero — no layered still-car plate. */
 export interface HeroTimelineElements {
   root: HTMLElement
   veil: HTMLElement
-  logo: HTMLElement
-  carWrap: HTMLElement
-  car: HTMLElement
+  video: HTMLVideoElement
   headlights: HTMLElement
   smoke: HTMLElement
   shadow: HTMLElement
-  copy: HTMLElement
+  reflection: HTMLElement
+  overlay: HTMLElement
+  headline: HTMLElement
+  description: HTMLElement
   ctas: HTMLElement
 }
 
@@ -29,6 +29,9 @@ export interface HeroTimelineOptions {
   elements: HeroTimelineElements
   reducedMotion: boolean
   onPhaseChange?: (phase: AnimationPhase) => void
+  onIgnition?: () => void
+  onDriveStart?: () => void
+  onDriveStop?: () => void
 }
 
 export interface ScrollRevealOptions {

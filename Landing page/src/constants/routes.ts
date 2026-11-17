@@ -3,6 +3,8 @@ export const routes = {
   home: '/',
   sections: {
     hero: '#hero',
+    /** Instant estimate fields live inside the enquiry form. */
+    quote: '#enquire',
     fleet: '#fleet',
     services: '#services',
     about: '#about',

@@ -5,15 +5,15 @@ type ButtonVariant = 'primary' | 'secondary' | 'ghost'
 type ButtonSize = 'md' | 'lg'
 
 const baseClass =
-  'inline-flex items-center justify-center gap-2 rounded-sm font-medium tracking-[0.08em] uppercase transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-cyan)]'
+  'inline-flex items-center justify-center gap-2 rounded-sm font-semibold tracking-[0.1em] uppercase transition-[color,background-color,border-color,box-shadow] duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-gold)]'
 
 const variantClass: Record<ButtonVariant, string> = {
   primary:
-    'bg-[var(--color-cyan)] text-[var(--color-black)] hover:bg-[var(--color-cyan-deep)] hover:text-white',
+    'bg-[var(--color-gold)] text-[var(--color-black)] shadow-[0_0_24px_rgba(197,155,39,0.25)] hover:bg-[var(--color-gold-soft)] hover:text-[var(--color-black)]',
   secondary:
-    'border border-[var(--color-chrome)]/50 bg-transparent text-[var(--color-chrome-bright)] hover:border-[var(--color-cyan)] hover:text-[var(--color-cyan)]',
+    'border border-[var(--color-gold)]/45 bg-transparent text-[var(--color-chrome-bright)] hover:border-[var(--color-gold)] hover:text-[var(--color-gold)]',
   ghost:
-    'bg-transparent text-[var(--color-chrome-bright)] hover:text-[var(--color-cyan)]',
+    'bg-transparent text-[var(--color-chrome-bright)] hover:text-[var(--color-gold)]',
 }
 
 const sizeClass: Record<ButtonSize, string> = {
