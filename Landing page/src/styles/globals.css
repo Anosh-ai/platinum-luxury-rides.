@@ -1,0 +1,47 @@
+@import 'tailwindcss';
+
+/*
+  Platinum Luxury Rides — design tokens only (Phase 1).
+  No section styling or component UI in this phase.
+*/
+:root {
+  /* Brand — derived from provided logo (chrome / cyan / black) */
+  --color-black: #0a0a0a;
+  --color-charcoal: #1a1a1a;
+  --color-chrome: #c8cdd3;
+  --color-chrome-bright: #e8ebef;
+  --color-cyan: #00d4e8;
+  --color-cyan-deep: #0099aa;
+
+  /* Light surfaces for non-hero sections */
+  --color-ivory: #f7f5f2;
+  --color-warm-white: #fbfaf8;
+  --color-beige: #ebe6df;
+  --color-neutral: #f0eeeb;
+
+  /* Typography roles (fonts wired in Phase 2) */
+  --font-display: Georgia, 'Times New Roman', serif;
+  --font-body: 'Segoe UI', system-ui, sans-serif;
+
+  --color-background: var(--color-warm-white);
+  --color-foreground: var(--color-charcoal);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-background);
+  color: var(--color-foreground);
+}
