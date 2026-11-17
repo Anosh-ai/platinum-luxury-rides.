@@ -1,14 +1,16 @@
-/** In-page anchors for the single landing route (Phase 1–2). */
+/** In-page anchors for the single landing route. */
 export const routes = {
   home: '/',
   sections: {
     hero: '#hero',
     fleet: '#fleet',
-    occasions: '#occasions',
     services: '#services',
-    whyChooseUs: '#why-choose-us',
+    about: '#about',
+    occasions: '#occasions',
+    whyChooseUs: '#about',
     testimonials: '#testimonials',
     faqs: '#faqs',
+    contact: '#contact',
     enquire: '#enquire',
   },
 } as const

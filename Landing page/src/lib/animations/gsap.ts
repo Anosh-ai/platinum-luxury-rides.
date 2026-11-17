@@ -1,12 +1,14 @@
-/**
- * GSAP bootstrap — register plugins once in Phase 2.
- * Intentionally empty implementation in Phase 1.
- */
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-// import gsap from 'gsap'
-// import { ScrollTrigger } from 'gsap/ScrollTrigger'
-// gsap.registerPlugin(ScrollTrigger)
+let registered = false
 
-export function registerGsapPlugins(): void {
-  // Phase 2: register ScrollTrigger (and any other plugins) exactly once.
+export function registerGsapPlugins(): typeof gsap {
+  if (!registered) {
+    gsap.registerPlugin(ScrollTrigger)
+    registered = true
+  }
+  return gsap
 }
+
+export { gsap, ScrollTrigger }

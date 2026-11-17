@@ -1,25 +1,68 @@
-import { useEffect } from 'react'
-import { createHeroTimeline, killHeroTimeline } from '../lib/animations/heroTimeline'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import {
+  createHeroTimeline,
+  killHeroTimeline,
+  replayHeroTimeline,
+  skipHeroTimeline,
+} from '../lib/animations/heroTimeline'
+import type { AnimationPhase, HeroTimelineElements } from '../types/animation'
 import { usePrefersReducedMotion } from './usePrefersReducedMotion'
-import { useSoundToggle } from './useSoundToggle'
 
-/**
- * Wires the cinematic hero timeline in Phase 2.
- * Phase 1: hook shell only — no timeline execution.
- */
 export function useHeroIntro() {
   const reducedMotion = usePrefersReducedMotion()
-  const sound = useSoundToggle(false)
+  const [phase, setPhase] = useState<AnimationPhase>('idle')
+  const [ready, setReady] = useState(false)
+  const elementsRef = useRef<HeroTimelineElements | null>(null)
+
+  const runIntro = useCallback(() => {
+    const elements = elementsRef.current
+    if (!elements) return
+    createHeroTimeline({
+      elements,
+      reducedMotion,
+      onPhaseChange: setPhase,
+    })
+  }, [reducedMotion])
+
+  const registerElements = useCallback((elements: HeroTimelineElements) => {
+    elementsRef.current = elements
+    setReady(true)
+  }, [])
 
   useEffect(() => {
-    createHeroTimeline({
-      reducedMotion,
-      soundEnabled: sound.enabled,
-    })
+    if (!ready) return
+    runIntro()
     return () => {
       killHeroTimeline()
     }
-  }, [reducedMotion, sound.enabled])
+  }, [ready, runIntro])
 
-  return { reducedMotion, sound }
+  const replay = useCallback(() => {
+    const elements = elementsRef.current
+    if (!elements) return
+    setPhase('idle')
+    replayHeroTimeline({
+      elements,
+      reducedMotion,
+      onPhaseChange: setPhase,
+    })
+  }, [reducedMotion])
+
+  const skip = useCallback(() => {
+    const elements = elementsRef.current
+    if (!elements) return
+    skipHeroTimeline({
+      elements,
+      reducedMotion,
+      onPhaseChange: setPhase,
+    })
+  }, [reducedMotion])
+
+  return {
+    phase,
+    reducedMotion,
+    registerElements,
+    replay,
+    skip,
+  }
 }

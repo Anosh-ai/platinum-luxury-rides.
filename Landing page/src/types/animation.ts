@@ -1,21 +1,33 @@
 /**
- * Animation contracts for GSAP / Motion integration (Phase 2+).
+ * Animation contracts for GSAP / Motion integration.
  */
 
 export type AnimationPhase =
   | 'idle'
   | 'logo'
   | 'headlights'
-  | 'ignition'
   | 'drive-in'
   | 'settle'
   | 'copy'
   | 'cta'
   | 'complete'
 
+export interface HeroTimelineElements {
+  root: HTMLElement
+  veil: HTMLElement
+  logo: HTMLElement
+  carWrap: HTMLElement
+  car: HTMLElement
+  headlights: HTMLElement
+  smoke: HTMLElement
+  shadow: HTMLElement
+  copy: HTMLElement
+  ctas: HTMLElement
+}
+
 export interface HeroTimelineOptions {
+  elements: HeroTimelineElements
   reducedMotion: boolean
-  soundEnabled: boolean
   onPhaseChange?: (phase: AnimationPhase) => void
 }
 
