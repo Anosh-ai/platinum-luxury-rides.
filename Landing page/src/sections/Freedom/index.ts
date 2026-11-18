@@ -1,0 +1,1 @@
+export { FreedomHighlights } from './FreedomHighlights'

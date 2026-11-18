@@ -2,6 +2,7 @@ import { motion, useReducedMotion } from 'motion/react'
 import { Button } from '../ui/Button'
 import { siteConfig } from '../../config/site.config'
 import { cn } from '../../lib/utils/cn'
+import { formatAud } from '../../lib/utils/format'
 import type { HireRate, Vehicle } from '../../types/fleet'
 
 type VehicleCardProps = {
@@ -16,7 +17,7 @@ function rateLabel(rate: HireRate): string {
   if (rate.enquiryOnly || rate.amountAud == null) {
     return `${mode} · Enquire ${unit}`
   }
-  return `${mode} $${rate.amountAud.toLocaleString('en-AU')} ${unit}`
+  return `${mode} ${formatAud(rate.amountAud)} ${unit}`
 }
 
 /**
@@ -48,7 +49,7 @@ export function VehicleCard({ vehicle, className, index = 0 }: VehicleCardProps)
           whileHover={reduceMotion ? undefined : { scale: 1.05 }}
           transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
         />
-        <span className="absolute left-3 top-3 bg-white/95 px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-[var(--color-gold-deep)] shadow-sm">
+        <span className="absolute left-3 top-3 bg-white/95 px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-[var(--color-cyan-deep)] shadow-sm">
           {vehicle.categoryLabel}
         </span>
       </div>
@@ -72,10 +73,10 @@ export function VehicleCard({ vehicle, className, index = 0 }: VehicleCardProps)
               <span className="text-[var(--color-charcoal)]/55">
                 {rate.mode === 'chauffeur' ? 'With chauffeur' : 'Self drive'}
               </span>
-              <span className="font-semibold text-[var(--color-gold-deep)]">
+              <span className="font-semibold text-[var(--color-cyan-deep)]">
                 {rate.enquiryOnly || rate.amountAud == null
                   ? 'Price on enquiry'
-                  : `$${rate.amountAud.toLocaleString('en-AU')} / ${rate.unit}`}
+                  : `${formatAud(rate.amountAud)} / ${rate.unit}`}
               </span>
             </li>
           ))}

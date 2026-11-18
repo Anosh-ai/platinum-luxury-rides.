@@ -13,11 +13,12 @@ type NavbarProps = {
 }
 
 /**
- * Sticky CRO header — Book Now + contact path. Logo unchanged.
+ * Sticky header — Book Now CTA. Nav items use bottom underline only (no text recolor).
  */
 export function Navbar({ revealed = true }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [activeHref, setActiveHref] = useState('')
   const menuId = useId()
 
   useEffect(() => {
@@ -25,6 +26,13 @@ export function Navbar({ revealed = true }: NavbarProps) {
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    const syncHash = () => setActiveHref(window.location.hash || '')
+    syncHash()
+    window.addEventListener('hashchange', syncHash)
+    return () => window.removeEventListener('hashchange', syncHash)
   }, [])
 
   useEffect(() => {
@@ -39,9 +47,6 @@ export function Navbar({ revealed = true }: NavbarProps) {
   }, [revealed])
 
   const closeMenu = () => setOpen(false)
-  const contactHref = siteConfig.contact.phoneTel ?? routes.sections.contact
-  const contactLabel = siteConfig.contact.phoneDisplay ?? 'Contact'
-  const hasPhone = Boolean(siteConfig.contact.phoneTel)
 
   return (
     <header
@@ -51,7 +56,7 @@ export function Navbar({ revealed = true }: NavbarProps) {
           ? 'pointer-events-auto translate-y-0 opacity-100'
           : 'pointer-events-none -translate-y-3 opacity-0',
         scrolled || open
-          ? 'border-b border-[var(--color-gold)]/20 bg-[var(--color-black)]/85 backdrop-blur-xl'
+          ? 'border-b border-[var(--color-cyan)]/20 bg-[var(--color-black)]/85 backdrop-blur-xl'
           : 'border-b border-transparent bg-transparent',
       )}
       aria-hidden={!revealed}
@@ -63,7 +68,7 @@ export function Navbar({ revealed = true }: NavbarProps) {
         <a
           href="#hero"
           tabIndex={revealed ? 0 : -1}
-          className="relative z-10 flex shrink-0 items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-gold)]"
+          className="relative z-10 flex shrink-0 items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-cyan)]"
           aria-label={`${siteConfig.brandName} — home`}
         >
           <img
@@ -78,28 +83,36 @@ export function Navbar({ revealed = true }: NavbarProps) {
 
         <div className="hidden items-center gap-6 xl:gap-8 lg:flex">
           <nav className="flex items-center gap-5 xl:gap-7" aria-label="Primary">
-            {mainNavigation.map((item) => (
-              <a
-                key={item.id}
-                href={item.href}
-                tabIndex={revealed ? 0 : -1}
-                className="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-[var(--color-chrome)] transition-colors hover:text-[var(--color-gold)]"
-              >
-                {item.label}
-              </a>
-            ))}
+            {mainNavigation.map((item) => {
+              const isActive = activeHref === item.href
+              return (
+                <a
+                  key={item.id}
+                  href={item.href}
+                  tabIndex={revealed ? 0 : -1}
+                  onClick={() => setActiveHref(item.href)}
+                  aria-current={isActive ? 'page' : undefined}
+                  className="group relative pb-1 text-[0.68rem] font-medium uppercase tracking-[0.18em] text-[var(--color-chrome)]"
+                >
+                  {item.label}
+                  <span
+                    className={cn(
+                      'absolute inset-x-0 bottom-0 h-px origin-left bg-[var(--color-cyan)] transition-transform duration-300',
+                      isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100',
+                    )}
+                    aria-hidden="true"
+                  />
+                </a>
+              )
+            })}
           </nav>
 
-          <a
-            href={contactHref}
+          <Button
+            href={routes.sections.quote}
+            variant="cyan"
+            size="md"
             tabIndex={revealed ? 0 : -1}
-            className="whitespace-nowrap text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-[var(--color-gold-soft)] transition-colors hover:text-white"
-            aria-label={hasPhone ? `Call ${contactLabel}` : 'Go to contact section'}
           >
-            {hasPhone ? contactLabel : '24/7 Contact'}
-          </a>
-
-          <Button href={routes.sections.quote} size="md" tabIndex={revealed ? 0 : -1}>
             Book Now
           </Button>
         </div>
@@ -107,6 +120,7 @@ export function Navbar({ revealed = true }: NavbarProps) {
         <div className="flex items-center gap-2 lg:hidden">
           <Button
             href={routes.sections.quote}
+            variant="cyan"
             size="md"
             tabIndex={revealed ? 0 : -1}
             className="!px-3 !py-2.5 text-[0.65rem]"
@@ -151,32 +165,44 @@ export function Navbar({ revealed = true }: NavbarProps) {
         {open && revealed ? (
           <motion.div
             id={menuId}
-            className="border-t border-[var(--color-gold)]/20 bg-[var(--color-black)]/95 backdrop-blur-xl lg:hidden"
+            className="border-t border-[var(--color-cyan)]/20 bg-[var(--color-black)]/95 backdrop-blur-xl lg:hidden"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
           >
             <Container className="flex flex-col gap-1 py-6">
-              {mainNavigation.map((item) => (
-                <a
-                  key={item.id}
-                  href={item.href}
-                  onClick={closeMenu}
-                  className="px-1 py-3 text-sm uppercase tracking-[0.16em] text-[var(--color-chrome-bright)]"
-                >
-                  {item.label}
-                </a>
-              ))}
-              <a
-                href={contactHref}
-                onClick={closeMenu}
-                className="px-1 py-3 text-sm uppercase tracking-[0.16em] text-[var(--color-gold)]"
-              >
-                {hasPhone ? contactLabel : 'Contact'}
-              </a>
+              {mainNavigation.map((item) => {
+                const isActive = activeHref === item.href
+                return (
+                  <a
+                    key={item.id}
+                    href={item.href}
+                    onClick={() => {
+                      setActiveHref(item.href)
+                      closeMenu()
+                    }}
+                    aria-current={isActive ? 'page' : undefined}
+                    className="relative w-fit px-1 py-3 text-sm uppercase tracking-[0.16em] text-[var(--color-chrome-bright)]"
+                  >
+                    {item.label}
+                    <span
+                      className={cn(
+                        'absolute inset-x-1 bottom-2 h-px bg-[var(--color-cyan)] transition-opacity',
+                        isActive ? 'opacity-100' : 'opacity-0',
+                      )}
+                      aria-hidden="true"
+                    />
+                  </a>
+                )
+              })}
               <div className="pt-4">
-                <Button href={routes.sections.quote} className="w-full" onClick={closeMenu}>
+                <Button
+                  href={routes.sections.quote}
+                  variant="cyan"
+                  className="w-full"
+                  onClick={closeMenu}
+                >
                   Book Now
                 </Button>
               </div>

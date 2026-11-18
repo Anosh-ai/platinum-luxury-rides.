@@ -85,7 +85,6 @@ export function EnquiryCta() {
 
   return (
     <section
-      id="contact"
       ref={rootRef}
       className="relative scroll-mt-24 overflow-hidden"
       aria-labelledby="enquire-heading"
@@ -99,21 +98,21 @@ export function EnquiryCta() {
           loading="lazy"
           decoding="async"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(105deg,rgba(5,5,5,0.94)_0%,rgba(5,5,5,0.78)_48%,rgba(90,70,20,0.55)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_50%,_rgba(197,155,39,0.2),_transparent_50%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(105deg,rgba(5,5,5,0.94)_0%,rgba(5,5,5,0.78)_48%,rgba(0,80,96,0.55)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_50%,_rgba(0,212,232,0.18),_transparent_50%)]" />
       </div>
 
       <div className="relative mx-auto grid max-w-[90rem] items-start gap-12 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16 lg:py-32">
         <div className="text-white lg:sticky lg:top-28">
           <Reveal>
-            <p className="font-[family-name:var(--font-display-alt)] text-[0.7rem] font-semibold uppercase tracking-[0.32em] text-[var(--color-gold)]">
+            <p className="font-[family-name:var(--font-display-alt)] text-[0.7rem] font-semibold uppercase tracking-[0.32em] text-[var(--color-cyan)]">
               {quoteSectionCopy.eyebrow} · {enquirySectionCopy.eyebrow}
             </p>
           </Reveal>
           <Reveal delay={0.08}>
             <h2
               id="enquire-heading"
-              className="mt-5 font-[family-name:var(--font-display)] text-[2.5rem] leading-[0.95] sm:text-5xl"
+              className="mt-4 font-[family-name:var(--font-display)] text-3xl leading-tight sm:text-4xl"
             >
               {enquirySectionCopy.title}
             </h2>
@@ -137,7 +136,7 @@ export function EnquiryCta() {
           >
             <form className="space-y-5" onSubmit={onSubmit} noValidate>
               <div>
-                <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-[var(--color-gold)]">
+                <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-[var(--color-cyan)]">
                   Vehicle class
                 </p>
                 <div className="mt-3 grid gap-3 sm:grid-cols-2">
@@ -151,8 +150,8 @@ export function EnquiryCta() {
                         className={cn(
                           'border px-3 py-3 text-left transition-colors',
                           active
-                            ? 'border-[var(--color-gold)] bg-[var(--color-gold)]/10'
-                            : 'border-white/15 hover:border-[var(--color-gold)]/50',
+                            ? 'border-[var(--color-cyan)] bg-[var(--color-cyan)]/10'
+                            : 'border-white/15 hover:border-[var(--color-cyan)]/50',
                         )}
                         aria-pressed={active}
                       >
@@ -177,7 +176,7 @@ export function EnquiryCta() {
                     onChange={(e) => setPickup(e.target.value)}
                     required
                     placeholder="Suburb or airport"
-                    className="mt-2 w-full border border-white/20 bg-black/40 px-3 py-3 text-sm text-white placeholder:text-white/30 focus:border-[var(--color-gold)] focus:outline-none"
+                    className="mt-2 w-full border border-white/20 bg-black/40 px-3 py-3 text-sm text-white placeholder:text-white/30 focus:border-[var(--color-cyan)] focus:outline-none"
                   />
                 </label>
                 <label className="block">
@@ -190,7 +189,7 @@ export function EnquiryCta() {
                     onChange={(e) => setDropoff(e.target.value)}
                     required
                     placeholder="Venue or address"
-                    className="mt-2 w-full border border-white/20 bg-black/40 px-3 py-3 text-sm text-white placeholder:text-white/30 focus:border-[var(--color-gold)] focus:outline-none"
+                    className="mt-2 w-full border border-white/20 bg-black/40 px-3 py-3 text-sm text-white placeholder:text-white/30 focus:border-[var(--color-cyan)] focus:outline-none"
                   />
                 </label>
               </div>
@@ -204,7 +203,7 @@ export function EnquiryCta() {
                     name="hours"
                     value={hours}
                     onChange={(e) => setHours(Number(e.target.value))}
-                    className="mt-2 w-full border border-white/20 bg-black/40 px-3 py-3 text-sm text-white focus:border-[var(--color-gold)] focus:outline-none"
+                    className="mt-2 w-full border border-white/20 bg-black/40 px-3 py-3 text-sm text-white focus:border-[var(--color-cyan)] focus:outline-none"
                   >
                     {hourOptions.map((value) => (
                       <option key={value} value={value} className="bg-[var(--color-black)]">
@@ -221,7 +220,7 @@ export function EnquiryCta() {
                     name="occasion"
                     value={occasion}
                     onChange={(e) => setOccasion(e.target.value)}
-                    className="mt-2 w-full border border-white/20 bg-black/40 px-3 py-3 text-sm text-white focus:border-[var(--color-gold)] focus:outline-none"
+                    className="mt-2 w-full border border-white/20 bg-black/40 px-3 py-3 text-sm text-white focus:border-[var(--color-cyan)] focus:outline-none"
                   >
                     {occasionOptions.map((value) => (
                       <option key={value} value={value} className="bg-[var(--color-black)]">
@@ -246,7 +245,7 @@ export function EnquiryCta() {
                   rows={3}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="mt-2 w-full border border-white/20 bg-black/40 px-3 py-3 text-sm text-white placeholder:text-white/30 focus:border-[var(--color-gold)] focus:outline-none"
+                  className="mt-2 w-full border border-white/20 bg-black/40 px-3 py-3 text-sm text-white placeholder:text-white/30 focus:border-[var(--color-cyan)] focus:outline-none"
                   placeholder="Any special requests…"
                 />
               </label>
@@ -256,7 +255,7 @@ export function EnquiryCta() {
               </Button>
 
               {submitted ? (
-                <p className="text-sm text-[var(--color-gold-soft)]" role="status">
+                <p className="text-sm text-[var(--color-cyan-soft)]" role="status">
                   Thank you — your estimate request is noted. A live send destination will activate
                   once Platinum confirms contact details.
                 </p>
@@ -297,7 +296,7 @@ function Field({
         placeholder={placeholder}
         autoComplete={autoComplete}
         required={required}
-        className="mt-2 w-full border border-white/20 bg-black/40 px-3 py-3 text-sm text-white placeholder:text-white/30 focus:border-[var(--color-gold)] focus:outline-none"
+        className="mt-2 w-full border border-white/20 bg-black/40 px-3 py-3 text-sm text-white placeholder:text-white/30 focus:border-[var(--color-cyan)] focus:outline-none"
       />
     </label>
   )

@@ -1,19 +1,23 @@
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react'
 import { cn } from '../../lib/utils/cn'
 
-type ButtonVariant = 'primary' | 'secondary' | 'ghost'
+type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'cyan' | 'cyanOutline'
 type ButtonSize = 'md' | 'lg'
 
 const baseClass =
-  'inline-flex items-center justify-center gap-2 rounded-sm font-semibold tracking-[0.1em] uppercase transition-[color,background-color,border-color,box-shadow] duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-gold)]'
+  'inline-flex items-center justify-center gap-2 rounded-sm font-semibold tracking-[0.1em] uppercase transition-[color,background-color,border-color,box-shadow] duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2'
 
 const variantClass: Record<ButtonVariant, string> = {
   primary:
-    'bg-[var(--color-gold)] text-[var(--color-black)] shadow-[0_0_24px_rgba(197,155,39,0.25)] hover:bg-[var(--color-gold-soft)] hover:text-[var(--color-black)]',
+    'bg-[var(--color-cyan)] text-[var(--color-black)] shadow-[0_0_24px_rgba(0,212,232,0.3)] hover:bg-[var(--color-cyan-soft)] hover:text-[var(--color-black)] focus-visible:outline-[var(--color-cyan)]',
   secondary:
-    'border border-[var(--color-gold)]/45 bg-transparent text-[var(--color-chrome-bright)] hover:border-[var(--color-gold)] hover:text-[var(--color-gold)]',
+    'border border-[var(--color-cyan)]/45 bg-transparent text-[var(--color-chrome-bright)] hover:border-[var(--color-cyan)] hover:text-[var(--color-cyan)] focus-visible:outline-[var(--color-cyan)]',
   ghost:
-    'bg-transparent text-[var(--color-chrome-bright)] hover:text-[var(--color-gold)]',
+    'bg-transparent text-[var(--color-chrome-bright)] hover:text-[var(--color-cyan)] focus-visible:outline-[var(--color-cyan)]',
+  cyan:
+    'bg-[var(--color-cyan)] text-[var(--color-black)] shadow-[0_0_24px_rgba(0,212,232,0.35)] hover:bg-[var(--color-cyan-soft)] hover:text-[var(--color-black)] focus-visible:outline-[var(--color-cyan)]',
+  cyanOutline:
+    'border border-[var(--color-cyan)]/50 bg-transparent text-[var(--color-chrome-bright)] hover:border-[var(--color-cyan)] hover:text-[var(--color-cyan)] focus-visible:outline-[var(--color-cyan)]',
 }
 
 const sizeClass: Record<ButtonSize, string> = {

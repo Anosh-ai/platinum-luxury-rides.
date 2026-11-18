@@ -13,7 +13,7 @@ export function FleetShowcase() {
       aria-labelledby="fleet-heading"
     >
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(197,155,39,0.08),_transparent_50%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(0,212,232,0.07),_transparent_50%)]"
         aria-hidden="true"
       />
       <div className="gold-rule absolute inset-x-0 top-0" aria-hidden="true" />
@@ -21,20 +21,20 @@ export function FleetShowcase() {
       <div className="relative mx-auto max-w-[90rem] px-5 py-20 sm:px-8 sm:py-28">
         <header className="mx-auto max-w-2xl text-center">
           <Reveal>
-            <p className="font-[family-name:var(--font-display-alt)] text-[0.7rem] font-semibold uppercase tracking-[0.32em] text-[var(--color-gold-deep)]">
+            <p className="font-[family-name:var(--font-display-alt)] text-[0.7rem] font-semibold uppercase tracking-[0.32em] text-[var(--color-cyan-deep)]">
               {fleetSectionCopy.eyebrow}
             </p>
           </Reveal>
           <Reveal delay={0.08}>
             <h2
               id="fleet-heading"
-              className="mt-5 font-[family-name:var(--font-display)] text-[2.5rem] leading-[0.95] text-[var(--color-charcoal)] sm:text-5xl"
+              className="mt-4 font-[family-name:var(--font-display)] text-3xl leading-tight text-[var(--color-charcoal)] sm:text-4xl"
             >
               {fleetSectionCopy.title}
             </h2>
           </Reveal>
           <Reveal delay={0.12}>
-            <p className="mt-5 text-base leading-relaxed text-[var(--color-charcoal)]/65 sm:text-lg">
+            <p className="mt-4 text-base leading-relaxed text-[var(--color-charcoal)]/65">
               {fleetSectionCopy.description}
             </p>
           </Reveal>

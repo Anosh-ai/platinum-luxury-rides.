@@ -70,7 +70,7 @@ function brakeToCruise(video: HTMLVideoElement, onStopped?: () => void): gsap.co
 function startSettleBreath(video: HTMLVideoElement): void {
   killSettleBreath()
   settleBreath = gsap.to(video, {
-    scale: 1.045,
+    scale: 1.012,
     duration: 5.5,
     ease: 'sine.inOut',
     yoyo: true,
@@ -84,7 +84,7 @@ function setFinalState(elements: HeroTimelineOptions['elements']): void {
   gsap.set(elements.video, {
     opacity: 1,
     xPercent: 0,
-    scale: 1.03,
+    scale: 1,
     filter: 'blur(0px) brightness(1) contrast(1.05)',
   })
   gsap.set(elements.headlights, { opacity: 0.35 })
@@ -133,8 +133,8 @@ export function createHeroTimeline(options: HeroTimelineOptions): gsap.core.Time
   gsap.set(elements.veil, { opacity: 1 })
   gsap.set(elements.video, {
     opacity: 1,
-    xPercent: 12,
-    scale: 1.34,
+    xPercent: 0,
+    scale: 1.08,
     filter: 'blur(3px) brightness(0.72) contrast(1.08)',
   })
   gsap.set(elements.headlights, { opacity: 0 })
@@ -168,8 +168,8 @@ export function createHeroTimeline(options: HeroTimelineOptions): gsap.core.Time
   tl.to(
     elements.video,
     {
-      xPercent: -6,
-      scale: 1.12,
+      xPercent: 0,
+      scale: 1,
       filter: 'blur(0.5px) brightness(1.05) contrast(1.12)',
       duration: 0.95,
       ease: 'power4.in',
@@ -186,7 +186,7 @@ export function createHeroTimeline(options: HeroTimelineOptions): gsap.core.Time
     elements.video,
     {
       xPercent: 0,
-      scale: 1.03,
+      scale: 1,
       filter: 'blur(0px) brightness(1) contrast(1.05)',
       duration: 1.2,
       ease: 'power3.out',
@@ -220,11 +220,4 @@ export function killHeroTimeline(): void {
     activeTimeline.kill()
     activeTimeline = null
   }
-}
-
-export function skipHeroTimeline(options: HeroTimelineOptions): void {
-  killHeroTimeline()
-  options.onDriveStop?.()
-  setFinalState(options.elements)
-  options.onPhaseChange?.('complete')
 }

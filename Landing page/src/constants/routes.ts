@@ -3,16 +3,17 @@ export const routes = {
   home: '/',
   sections: {
     hero: '#hero',
+    fleet: '#fleet',
+    /** Freedom / difference highlights */
+    difference: '#difference',
+    occasions: '#occasions',
+    /** Why Platinum section */
+    about: '#about',
+    faqs: '#faqs',
+    enquire: '#enquire',
     /** Instant estimate fields live inside the enquiry form. */
     quote: '#enquire',
-    fleet: '#fleet',
-    services: '#services',
-    about: '#about',
-    occasions: '#occasions',
-    whyChooseUs: '#about',
-    testimonials: '#testimonials',
-    faqs: '#faqs',
+    /** Footer contact icons */
     contact: '#contact',
-    enquire: '#enquire',
   },
 } as const

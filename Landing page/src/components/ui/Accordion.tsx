@@ -38,7 +38,7 @@ export function Accordion({ items, className, tone = 'light' }: AccordionProps) 
                 aria-controls={panelId}
                 onClick={() => setOpenId(isOpen ? null : item.id)}
                 className={cn(
-                  'flex w-full items-center justify-between gap-4 py-5 text-left transition-colors sm:py-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-cyan)]',
+                  'flex w-full items-center justify-between gap-3 py-4 text-left transition-colors sm:gap-4 sm:py-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-cyan)]',
                   dark
                     ? 'hover:text-[var(--color-cyan)]'
                     : 'hover:text-[var(--color-cyan-deep)]',
@@ -46,7 +46,7 @@ export function Accordion({ items, className, tone = 'light' }: AccordionProps) 
               >
                 <span
                   className={cn(
-                    'font-[family-name:var(--font-display)] text-xl sm:text-2xl',
+                    'font-[family-name:var(--font-display)] text-base leading-snug sm:text-lg',
                     dark ? 'text-white' : 'text-[var(--color-charcoal)]',
                   )}
                 >
@@ -54,8 +54,8 @@ export function Accordion({ items, className, tone = 'light' }: AccordionProps) 
                 </span>
                 <span
                   className={cn(
-                    'flex h-8 w-8 shrink-0 items-center justify-center border text-lg leading-none transition-transform duration-300',
-                    dark ? 'border-white/20' : 'border-black/15',
+                    'flex h-7 w-7 shrink-0 items-center justify-center border text-base leading-none transition-transform duration-300',
+                    dark ? 'border-white/20' : 'border-black/12',
                     isOpen && 'rotate-45 border-[var(--color-cyan)] text-[var(--color-cyan)]',
                   )}
                   aria-hidden="true"
@@ -78,8 +78,8 @@ export function Accordion({ items, className, tone = 'light' }: AccordionProps) 
                 >
                   <p
                     className={cn(
-                      'max-w-3xl pb-6 text-sm leading-relaxed sm:text-base',
-                      dark ? 'text-white/60' : 'text-[var(--color-charcoal)]/70',
+                      'max-w-3xl pb-5 text-sm leading-relaxed',
+                      dark ? 'text-white/60' : 'text-[var(--color-charcoal)]/65',
                     )}
                   >
                     {item.answer}

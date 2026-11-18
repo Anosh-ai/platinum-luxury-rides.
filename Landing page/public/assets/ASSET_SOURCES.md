@@ -28,18 +28,20 @@ Interim stock for the Fleet Showcase. Replace with client fleet photography when
 | `images/fleet/fleet-luxury-convertible.jpg` | [Pexels #337909](https://www.pexels.com/photo/337909/) | [Pexels Licence](https://www.pexels.com/license/) |
 | `images/fleet/fleet-premium-suv-white.jpg` | [Pexels #210019](https://www.pexels.com/photo/210019/) | [Pexels Licence](https://www.pexels.com/license/) |
 
-## Occasions / Services / CTA — illustrative photography
+## Freedom / difference section
+
+| File | Source | Licence |
+| --- | --- | --- |
+| `images/freedom/freedom-luxury-sedan.png` | Generated luxury sedan cutout (transparent) | Project-generated |
+
+## Occasions / CTA — illustrative photography
 
 | File | Source | Licence |
 | --- | --- | --- |
 | `images/occasions/wedding.jpg` | Just Married vintage wedding car — cleaned landscape plate | Project-generated clean plate |
-| `images/occasions/corporate.jpg` | Client reference (executive in cabin) — clean render, no iStock mark | Client / generated clean plate |
+| `images/occasions/corporate.jpg` | [Pexels #18369292](https://www.pexels.com/photo/18369292/) black luxury sedan | [Pexels Licence](https://www.pexels.com/license/) |
 | `images/occasions/formal.jpg` | Client-supplied white classic Corvette (school formals) | Client-supplied |
-| `images/occasions/special.jpg` | Client-supplied red Fiat 500 on tree avenue (private celebrations) | Client-supplied |
-| `images/services/chauffeur.jpg` | [Pexels #3807517](https://www.pexels.com/photo/3807517/) | [Pexels Licence](https://www.pexels.com/license/) |
-| `images/services/airport-transfer.jpg` | [Pexels #358319](https://www.pexels.com/photo/358319/) | [Pexels Licence](https://www.pexels.com/license/) |
-| `images/services/self-drive.jpg` | [Pexels #3802510](https://www.pexels.com/photo/3802510/) | [Pexels Licence](https://www.pexels.com/license/) |
-| `images/services/events.jpg` | [Pexels #1190297](https://www.pexels.com/photo/1190297/) | [Pexels Licence](https://www.pexels.com/license/) |
+| `images/occasions/special.jpg` | [Pexels #1402787](https://www.pexels.com/photo/1402787/) dark sports car private driveway | [Pexels Licence](https://www.pexels.com/license/) |
 | `images/cta/enquiry-backdrop.jpg` | [Pexels #3764984](https://www.pexels.com/photo/3764984/) | [Pexels Licence](https://www.pexels.com/license/) |
 
 ## Note

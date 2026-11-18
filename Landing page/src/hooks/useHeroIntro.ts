@@ -1,9 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import {
-  createHeroTimeline,
-  killHeroTimeline,
-  skipHeroTimeline,
-} from '../lib/animations/heroTimeline'
+import { createHeroTimeline, killHeroTimeline } from '../lib/animations/heroTimeline'
 import type { AnimationPhase, HeroTimelineElements } from '../types/animation'
 import { usePrefersReducedMotion } from './usePrefersReducedMotion'
 
@@ -74,21 +70,9 @@ export function useHeroIntro(onUiReady?: () => void) {
     }
   }, [ready, runIntro])
 
-  const skip = useCallback(() => {
-    const elements = elementsRef.current
-    if (!elements) return
-    skipHeroTimeline({
-      elements,
-      reducedMotion,
-      onPhaseChange: handlePhase,
-    })
-    markUiReady()
-  }, [reducedMotion, handlePhase, markUiReady])
-
   return {
     phase,
     reducedMotion,
     registerElements,
-    skip,
   }
 }

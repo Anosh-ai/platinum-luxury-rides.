@@ -19,31 +19,18 @@ export interface CtaLink {
 export interface OccasionItem {
   id: string
   title: string
+  shortLabel?: string
   summary?: string
   href?: string
+  ctaLabel?: string
   imageSrc?: string
-}
-
-export interface ServiceItem {
-  id: string
-  title: string
-  summary?: string
-  href?: string
-  imageSrc?: string
+  imageAlt?: string
 }
 
 export interface FaqItem {
   id: string
   question: string
   answer: string
-}
-
-export interface TestimonialItem {
-  id: string
-  quote: string
-  author: string
-  source?: string
-  dateLabel?: string
 }
 
 export interface WhyChooseUsItem {

@@ -8,12 +8,10 @@
   --color-chrome: #c8cdd3;
   --color-chrome-bright: #e8ebef;
 
-  /* Luxury gold system (CRO redesign) — cyan kept as alias for locked Hero classes */
-  --color-gold: #c59b27;
-  --color-gold-soft: #d4af37;
-  --color-gold-deep: #9a7618;
-  --color-cyan: var(--color-gold);
-  --color-cyan-deep: var(--color-gold-deep);
+  /* Brand cyan system (logo match) */
+  --color-cyan: #00d4e8;
+  --color-cyan-soft: #5cefff;
+  --color-cyan-deep: #00a8c0;
 
   --color-ivory: #f7f5f2;
   --color-warm-white: #fbfaf8;
@@ -29,9 +27,9 @@
   --color-foreground: var(--color-charcoal);
 
   --glass-bg: rgba(18, 18, 18, 0.55);
-  --glass-border: rgba(197, 155, 39, 0.28);
+  --glass-border: rgba(0, 212, 232, 0.28);
   --glass-bg-light: rgba(255, 255, 255, 0.72);
-  --glass-border-light: rgba(197, 155, 39, 0.35);
+  --glass-border-light: rgba(0, 212, 232, 0.35);
 }
 
 *,
@@ -114,7 +112,7 @@ img {
 
 .gold-rule {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  background: linear-gradient(90deg, transparent, var(--color-cyan), transparent);
 }
 
 @keyframes float-badge {
@@ -129,4 +127,44 @@ img {
 
 .float-badge {
   animation: float-badge 3.6s ease-in-out infinite;
+}
+
+@keyframes float-car {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.float-car {
+  animation: float-car 4.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-car {
+    animation: none !important;
+  }
+}
+
+/* Diagonal white glint for Freedom car */
+.car-shine-beam {
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    transparent 42%,
+    rgba(255, 255, 255, 0.12) 46%,
+    rgba(255, 255, 255, 0.7) 50%,
+    rgba(255, 255, 255, 0.12) 54%,
+    transparent 58%,
+    transparent 100%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .car-shine-beam {
+    display: none !important;
+  }
 }

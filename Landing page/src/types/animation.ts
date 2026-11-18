@@ -33,11 +33,3 @@ export interface HeroTimelineOptions {
   onDriveStart?: () => void
   onDriveStop?: () => void
 }
-
-export interface ScrollRevealOptions {
-  trigger: Element | string
-  start?: string
-  end?: string
-  scrub?: boolean | number
-  once?: boolean
-}

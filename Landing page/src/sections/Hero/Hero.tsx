@@ -25,7 +25,7 @@ export function Hero({ onUiReady }: HeroProps) {
   const descriptionRef = useRef<HTMLParagraphElement>(null)
   const ctasRef = useRef<HTMLDivElement>(null)
 
-  const { phase, reducedMotion, registerElements, skip } = useHeroIntro(onUiReady)
+  const { registerElements } = useHeroIntro(onUiReady)
 
   useLayoutEffect(() => {
     if (
@@ -58,8 +58,6 @@ export function Hero({ onUiReady }: HeroProps) {
       ctas: ctasRef.current,
     })
   }, [registerElements])
-
-  const showSkip = !reducedMotion && phase !== 'complete'
 
   return (
     <section
@@ -126,7 +124,7 @@ export function Hero({ onUiReady }: HeroProps) {
         <div className="mx-auto max-w-3xl">
           <h1
             ref={headlineRef}
-            className="font-[family-name:var(--font-display)] text-[clamp(2.35rem,5.8vw,4.35rem)] leading-[1.05] tracking-[-0.02em] text-white"
+            className="font-[family-name:var(--font-display)] text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.1] tracking-[-0.02em] text-white"
           >
             Your ultimate <span className="text-[var(--color-cyan)]">luxury</span> drive
             awaits.
@@ -141,29 +139,19 @@ export function Hero({ onUiReady }: HeroProps) {
             ref={ctasRef}
             className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4"
           >
-            <Button href={siteContent.primaryCta.href} size="lg">
+            <Button href={siteContent.primaryCta.href} variant="cyan" size="lg">
               {siteContent.primaryCta.label}
             </Button>
-            <Button href={siteContent.secondaryCta.href} variant="secondary" size="lg">
+            <Button
+              href={siteContent.secondaryCta.href}
+              variant="cyanOutline"
+              size="lg"
+            >
               {siteContent.secondaryCta.label}
             </Button>
           </div>
         </div>
       </Container>
-
-      {showSkip ? (
-        <div className="absolute bottom-6 right-5 z-[5] sm:bottom-8 sm:right-8">
-          <Button
-            type="button"
-            variant="secondary"
-            size="md"
-            className="px-3 py-2 text-[0.65rem]"
-            onClick={skip}
-          >
-            Skip intro
-          </Button>
-        </div>
-      ) : null}
     </section>
   )
 }
